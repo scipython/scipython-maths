@@ -3,6 +3,11 @@ from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
+# Create an image of the Lorenz attractor.
+# The maths behind this code is described in the scipython blog article
+# at https://scipython.com/blog/the-lorenz-attractor/
+# Christian Hill, January 2016.
+
 # Lorenz paramters and initial conditions
 sigma, beta, rho = 10, 2.667, 28
 u0, v0, w0 = 0, 1, 1.05
@@ -39,4 +44,3 @@ ax.set_axis_off()
 
 plt.savefig('lorenz.png')
 plt.show()
-
