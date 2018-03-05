@@ -1,0 +1,6 @@
+*.swp
+*.pyc
+*.pyo
+*.db
+.DS_Store
+.coverage
