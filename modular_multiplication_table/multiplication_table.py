@@ -5,11 +5,9 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 
 # Create a colour-coded multiplication table based on modular arithmetic.
-# algorithm. The maths behind this code is described in the scipython blog
-# article at
+# The maths behind this code is described in the scipython blog article at
 # https://scipython.com/blog/visulaizing-modular-multiplication-tables/
 # Christian Hill, May 2016.
-
 
 def multiplication_table(n, N=None, number_labels=True):
     """Create and plot an image of a multiplication table modulo n
