@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from poisson import PoissonDisc
 
 # Generate periodogram images for uniformly-distributed noise and
-# Poisson ("blue") noise in two dimensions.
+# Poisson disc-sampled ("blue") noise in two dimensions.
 # For mathematical details,  please see the blog articles at
 # https://scipython.com/blog/poisson-disc-sampling-in-python/
 # https://scipython.com/blog/power-spectra-for-blue-and-uniform-noise/

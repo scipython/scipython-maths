@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Procedural algorithm for the generation of two-dimensional Poission ("blue")
-# noise. For mathematical details, please see the blog
+# Procedural algorithm for the generation of two-dimensional Poission-disc
+# sampled ("blue") noise. For mathematical details, please see the blog
 # article at https://scipython.com/blog/poisson-disc-sampling-in-python/
 # Christian Hill, March 2017.
 
