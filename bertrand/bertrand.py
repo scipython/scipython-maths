@@ -57,8 +57,11 @@ def get_chords_from_midpoints(midpoints):
     # (y0=0), but it's rather unlikely over 10000 trials, so don't bother.
     chords = np.zeros((nchords, 2, 2))
     for i, (x0, y0) in enumerate(midpoints.T):
+        # y = mx + c is the equation of the chord.
         m = -x0/y0
         c = y0 + x0**2/y0
+        # Solve the quadratic equation determining where the chord intersects
+        # the circle to find its endpoints.
         A, B, C = m**2 + 1, 2*m*c, c**2 - r**2
         d = np.sqrt(B**2 - 4*A*C)
         x = np.array( ((-B + d), (-B - d))) / 2 / A
