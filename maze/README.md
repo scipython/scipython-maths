@@ -4,5 +4,5 @@ Change the dimensions by altering the variables `nx` and `ny`.
 For example with `nx = ny = 40`:
 
 <p align="center">
-<img width="515" height="515" src="maze/df_maze.png" alt="Sample depth-first 40x40 maze">
+<img width="515" height="515" src="df_maze.png" alt="Sample depth-first 40x40 maze">
 </p>
