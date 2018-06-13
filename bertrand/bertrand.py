@@ -3,6 +3,11 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 from matplotlib.lines import Line2D
 
+# A stochastic analysis of selection methods in Betrand's Paradox.
+# A description of this problem is available on the blog page at
+# https://scipython.com/blog/bertrands-paradox/
+# Christian Hill, April 2018.
+
 TAU = 2 * np.pi
 
 # Fractional RGB values for light grey.
