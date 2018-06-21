@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" >
+
+    <defs>
+    <style type="text/css"><![CDATA[
+
+    circle {
+        stroke-width: 2px;
+        stroke: #000;
+        fill: none;
+    }
+    .marker { stroke-width: 0; fill: #000;}
+    .circle {stroke: #888;}
+
+    path {
+        stroke-width: 4px;
+        stroke: #000;
+        fill: #888;
+    }
+
+    ]]></style>
+    </defs>
+    
+<circle cx="346.0014723104242" cy="379.67688726462757" r="175" class="circle"/>
+<circle cx="238.4380138790513" cy="368.37151222366674" r="175" class="circle"/>
+<circle cx="215.9511278518802" cy="262.5790311518274" r="175" class="circle"/>
+<circle cx="309.6169264173163" cy="208.50105713621156" r="175" class="circle"/>
+<circle cx="389.992459541328" cy="280.8715122236667" r="175" class="circle"/>
+<path d="M 346.0014723104242,379.67688726462757 A 175,175,0,0,1,238.4380138790513,368.37151222366674 A 175,175,0,0,1,215.9511278518802,262.5790311518274 A 175,175,0,0,1,309.6169264173163,208.50105713621156 A 175,175,0,0,1,389.992459541328,280.8715122236667 A 175,175,0,0,1,346.0014723104242,379.67688726462757"/>
+</svg>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="600" >
+
+    <defs>
+    <style type="text/css"><![CDATA[
+
+    circle {
+        stroke-width: 2px;
+        stroke: #000;
+        fill: none;
+    }
+    .marker { stroke-width: 0; fill: #000;}
+    .circle {stroke: #888;}
+
+    path {
+        stroke-width: 4px;
+        stroke: #000;
+        fill: #eea;
+    }
+
+    ]]></style>
+    </defs>
+    
+<circle cx="401.0362971081845" cy="300.0" r="175" class="circle"/>
+<circle cx="249.48185144590778" cy="387.5" r="175" class="circle"/>
+<circle cx="249.4818514459077" cy="212.50000000000006" r="175" class="circle"/>
+<path d="M 401.0362971081845,300.0 A 175,175,0,0,1,249.48185144590778,387.5 A 175,175,0,0,1,249.4818514459077,212.50000000000006 A 175,175,0,0,1,401.0362971081845,300.0"/>
+</svg>
