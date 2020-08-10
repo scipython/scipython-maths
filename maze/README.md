@@ -1,4 +1,4 @@
-The script `df_maze.py` creates a maze using the depth-first algorithm as described at https://scipython.com/blog/making-a-maze/.
+The script `make_df_maze.py` creates a maze using the depth-first algorithm as described at https://scipython.com/blog/making-a-maze/.
 Change the dimensions by altering the variables `nx` and `ny`.
 
 For example with `nx = ny = 40`:
