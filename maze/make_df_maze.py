@@ -10,3 +10,10 @@ maze.make_maze()
 
 print(maze)
 maze.write_svg('maze.svg')
+
+# Solve the maze from the entry position to (13,12)
+# solution_path = maze.solve_from_to((ix,iy),(13,12))
+# print(solution_path)
+
+# Draw the solution from the entry position to (10,5)
+maze.write_svg('maze_solved.svg', end=(10, 5))
