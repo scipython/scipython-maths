@@ -204,15 +204,15 @@ class Maze:
         np_start = np.array(start)
         np_end = np.array(end)
         np_start[np_start < 0] = 0
-        if np_start[0] > self.nx:
+        if np_start[0] >= self.nx:
             np_start[0] = self.nx - 1
-        if np_start[1] > self.ny:
+        if np_start[1] >= self.ny:
             np_start[1] = self.ny - 1
 
         np_end[np_end < 0] = 0
-        if np_end[0] > self.nx:
+        if np_end[0] >= self.nx:
             np_end[0] = self.nx - 1
-        if np_end[1] > self.ny:
+        if np_end[1] >= self.ny:
             np_end[1] = self.ny - 1
 
         x0 = np_start[0]
