@@ -33,6 +33,10 @@ def iterate(X):
                 X1[iy,ix] = TREE
                 for dx,dy in neighbourhood:
                     if X[iy+dy,ix+dx] == FIRE:
+                        # The diagonally-adjacent trees are further away, so
+                        # only catch fire with a reduced probability:
+                        if abs(dx) == abs(dy) and np.random.random() < 0.573:
+                            break
                         X1[iy,ix] = FIRE
                         break
                 else:
@@ -43,7 +47,7 @@ def iterate(X):
 # The initial fraction of the forest occupied by trees.
 forest_fraction = 0.2
 # Probability of new tree growth per empty cell, and of lightning strike.
-p, f = 0.05, 0.001
+p, f = 0.05, 0.00001
 # Forest size (number of cells in x and y directions).
 nx, ny = 100, 100
 # Initialize the forest grid.

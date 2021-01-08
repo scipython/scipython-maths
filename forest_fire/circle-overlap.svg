@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" width="500" height="500" >
+<circle cx="250" cy="250" r="150" style="fill: red; fill-opacity: 0.5;"/>
+<circle cx="350" cy="250" r="50" style="fill: red; fill-opacity: 0.5;"/>
+<circle cx="350" cy="150" r="50" style="fill: blue; fill-opacity: 0.5;"/>
+<line x1="0" y1="0" x2="0" y2="500" stroke="#444444"/>
+<line x1="100" y1="0" x2="100" y2="500" stroke="#444444"/>
+<line x1="200" y1="0" x2="200" y2="500" stroke="#444444"/>
+<line x1="300" y1="0" x2="300" y2="500" stroke="#444444"/>
+<line x1="400" y1="0" x2="400" y2="500" stroke="#444444"/>
+
+<line y1="100" x1="0" y2="100" x2="500" stroke="#444444"/>
+<line y1="200" x1="0" y2="200" x2="500" stroke="#444444"/>
+<line y1="300" x1="0" y2="300" x2="500" stroke="#444444"/>
+<line y1="400" x1="0" y2="400" x2="500" stroke="#444444"/>
+</svg>
