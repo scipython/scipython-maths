@@ -7,6 +7,7 @@ from matplotlib import colors
 # The maths behind this code is described in the scipython blog article
 # at https://scipython.com/blog/the-forest-fire-model/
 # Christian Hill, January 2016.
+# Updated January 2020.
 
 # Displacements from a cell to its eight nearest neighbours
 neighbourhood = ((-1,-1), (-1,0), (-1,1), (0,-1), (0, 1), (1,-1), (1,0), (1,1))
@@ -32,11 +33,11 @@ def iterate(X):
             if X[iy,ix] == TREE:
                 X1[iy,ix] = TREE
                 for dx,dy in neighbourhood:
+                    # The diagonally-adjacent trees are further away, so
+                    # only catch fire with a reduced probability:
+                    if abs(dx) == abs(dy) and np.random.random() < 0.573:
+                        continue
                     if X[iy+dy,ix+dx] == FIRE:
-                        # The diagonally-adjacent trees are further away, so
-                        # only catch fire with a reduced probability:
-                        if abs(dx) == abs(dy) and np.random.random() < 0.573:
-                            break
                         X1[iy,ix] = FIRE
                         break
                 else:
@@ -47,7 +48,7 @@ def iterate(X):
 # The initial fraction of the forest occupied by trees.
 forest_fraction = 0.2
 # Probability of new tree growth per empty cell, and of lightning strike.
-p, f = 0.05, 0.00001
+p, f = 0.05, 0.0001
 # Forest size (number of cells in x and y directions).
 nx, ny = 100, 100
 # Initialize the forest grid.
@@ -69,5 +70,6 @@ animate.X = X
 
 # Interval between frames (ms).
 interval = 100
-anim = animation.FuncAnimation(fig, animate, interval=interval)
+anim = animation.FuncAnimation(fig, animate, interval=interval, frames=200)
+#anim.save("forest_fire.mp4")
 plt.show()
