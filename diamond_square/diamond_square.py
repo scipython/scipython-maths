@@ -7,8 +7,10 @@ import matplotlib.pyplot as plt
 # https://scipython.com/blog/cloud-images-using-the-diamond-square-algorithm/
 # Christian Hill, March 2016.
 
+DPI = 100
+
 # The array must be square with edge length 2**n + 1
-n = 6
+n = 10
 N = 2**n + 1
 # f scales the random numbers at each stage of the algorithm
 f = 1.0
@@ -55,8 +57,9 @@ while side > 1:
     nsquares *= 2
     f /= 2
 
-plt.imshow(arr, cmap=plt.cm.Blues)
+fig = plt.figure(figsize=(N/DPI, N/DPI), dpi=DPI)
+plt.imshow(arr, cmap=plt.cm.terrain, interpolation='bicubic')
 plt.axis('off')
-plt.savefig('cloud.png')
 
-
+plt.savefig('terrain.png', dpi=DPI)
+plt.show()

@@ -49,10 +49,17 @@ class Maze:
         self.ix, self.iy = ix, iy
         self.maze_map = [[Cell(x, y) for y in range(ny)] for x in range(nx)]
 
+        self.add_begin_end = False
+        self.add_treasure = False
+        self.treasure_x = random.randint(0, self.nx-1)
+        self.treasure_y = random.randint(0, self.ny-1)
+
+
     def cell_at(self, x, y):
         """Return the Cell object at (x,y)."""
 
         return self.maze_map[x][y]
+
 
     def __str__(self):
         """Return a (crude) string representation of the maze."""
@@ -75,6 +82,7 @@ class Maze:
             maze_rows.append(''.join(maze_row))
         return '\n'.join(maze_rows)
 
+
     def write_svg(self, filename):
         """Write an SVG image of the maze to filename."""
 
@@ -92,6 +100,11 @@ class Maze:
 
             print('<line x1="{}" y1="{}" x2="{}" y2="{}"/>'
                   .format(ww_x1, ww_y1, ww_x2, ww_y2), file=ww_f)
+
+        def add_cell_rect(f, x, y, colour):
+            pad = 5
+            print(f'<rect x="{scx*x+pad}" y="{scy*y+pad}" width="{scx-2*pad}"'
+                  f' height="{scy-2*pad}" style="fill:{colour}" />', file=f) 
 
         # Write the SVG image file for maze
         with open(filename, 'w') as f:
@@ -123,7 +136,15 @@ class Maze:
             # by the procedure above.
             print('<line x1="0" y1="0" x2="{}" y2="0"/>'.format(width), file=f)
             print('<line x1="0" y1="0" x2="0" y2="{}"/>'.format(height), file=f)
+
+            if self.add_begin_end:
+                add_cell_rect(f, 0, 0, 'green')
+                add_cell_rect(f, self.nx - 1, self.ny - 1, 'red')
+            if self.add_treasure:
+                add_cell_rect(f, self.treasure_x, self.treasure_y, 'yellow')
+
             print('</svg>', file=f)
+
 
     def find_valid_neighbours(self, cell):
         """Return a list of unvisited neighbours to cell."""
@@ -140,6 +161,7 @@ class Maze:
                 if neighbour.has_all_walls():
                     neighbours.append((direction, neighbour))
         return neighbours
+
 
     def make_maze(self):
         # Total number of cells.

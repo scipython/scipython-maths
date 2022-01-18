@@ -6,6 +6,8 @@ nx, ny = 15, 15
 ix, iy = 0, 0
 
 maze = Maze(nx, ny, ix, iy)
+maze.add_begin_end = True
+maze.add_treasure = True
 maze.make_maze()
 
 print(maze)
