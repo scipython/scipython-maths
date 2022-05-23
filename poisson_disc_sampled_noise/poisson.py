@@ -97,15 +97,15 @@ class PoissonDisc():
 
         i = 0
         while i < self.k:
-            rho, theta = (np.random.uniform(self.r, 2*self.r),
-                          np.random.uniform(0, 2*np.pi))
+            i += 1
+            rho = np.sqrt(np.random.uniform(r**2, 4 * r**2))
+            theta = np.random.uniform(0, 2*np.pi)
             pt = refpt[0] + rho*np.cos(theta), refpt[1] + rho*np.sin(theta)
             if not (0 <= pt[0] < self.width and 0 <= pt[1] < self.height):
                 # This point falls outside the domain, so try again.
                 continue
             if self.point_valid(pt):
                 return pt
-            i += 1
         # We failed to find a suitable point in the vicinity of refpt.
         return False
 
