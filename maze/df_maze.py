@@ -54,6 +54,10 @@ class Maze:
         self.treasure_x = random.randint(0, self.nx-1)
         self.treasure_y = random.randint(0, self.ny-1)
 
+        # Give the coordinates of walls that you do *not* wish to be
+        # present in the output here.
+        self.excluded_walls = [((nx-1, ny), (nx, ny)),
+                               ((0, 0), (0, 1))]
 
     def cell_at(self, x, y):
         """Return the Cell object at (x,y)."""
@@ -95,11 +99,15 @@ class Maze:
         # Scaling factors mapping maze coordinates to image coordinates
         scy, scx = height / self.ny, width / self.nx
 
-        def write_wall(ww_f, ww_x1, ww_y1, ww_x2, ww_y2):
+        def write_wall(f, x1, y1, x2, y2):
             """Write a single wall to the SVG image file handle f."""
 
+            if ((x1, y1), (x2, y2)) in self.excluded_walls:
+                print(f'Excluding wall at {((x1, y1), (x2, y2))}')
+                return
+            sx1, sy1, sx2, sy2 = x1*scx, y1*scy, x2*scx, y2*scy
             print('<line x1="{}" y1="{}" x2="{}" y2="{}"/>'
-                  .format(ww_x1, ww_y1, ww_x2, ww_y2), file=ww_f)
+                  .format(sx1, sy1, sx2, sy2), file=f)
 
         def add_cell_rect(f, x, y, colour):
             pad = 5
@@ -127,15 +135,21 @@ class Maze:
             for x in range(self.nx):
                 for y in range(self.ny):
                     if self.cell_at(x, y).walls['S']:
-                        x1, y1, x2, y2 = x * scx, (y + 1) * scy, (x + 1) * scx, (y + 1) * scy
+                        x1, y1, x2, y2 = x, y+1, x+1, y+1
                         write_wall(f, x1, y1, x2, y2)
                     if self.cell_at(x, y).walls['E']:
-                        x1, y1, x2, y2 = (x + 1) * scx, y * scy, (x + 1) * scx, (y + 1) * scy
+                        x1, y1, x2, y2 = x+1, y, x+1, y+1
                         write_wall(f, x1, y1, x2, y2)
+
             # Draw the North and West maze border, which won't have been drawn
             # by the procedure above.
-            print('<line x1="0" y1="0" x2="{}" y2="0"/>'.format(width), file=f)
-            print('<line x1="0" y1="0" x2="0" y2="{}"/>'.format(height), file=f)
+            for x in range(self.nx):
+                write_wall(f, x, 0, x+1, 0)
+            for y in range(self.ny):
+                write_wall(f, 0, y, 0, y+1)
+                
+            #print('<line x1="0" y1="0" x2="{}" y2="0"/>'.format(width), file=f)
+            #print('<line x1="0" y1="0" x2="0" y2="{}"/>'.format(height), file=f)
 
             if self.add_begin_end:
                 add_cell_rect(f, 0, 0, 'green')
