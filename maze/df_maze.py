@@ -22,6 +22,10 @@ class Cell:
 
         self.x, self.y = x, y
         self.walls = {'N': True, 'S': True, 'E': True, 'W': True}
+    
+    def __repr__(self):
+        """return a string representation of a cell"""
+        return f'({self.x}, {self.y})'
 
     def has_all_walls(self):
         """Does this cell still have all its walls?"""
@@ -58,6 +62,9 @@ class Maze:
         # present in the output here.
         self.excluded_walls = [((nx-1, ny), (nx, ny)),
                                ((0, 0), (0, 1))]
+        
+        # Store the solution to the maze
+        self.solution = None
 
     def cell_at(self, x, y):
         """Return the Cell object at (x,y)."""
@@ -87,7 +94,7 @@ class Maze:
         return '\n'.join(maze_rows)
 
 
-    def write_svg(self, filename):
+    def write_svg(self, filename, solution=False):
         """Write an SVG image of the maze to filename."""
 
         aspect_ratio = self.nx / self.ny
@@ -157,6 +164,14 @@ class Maze:
             if self.add_treasure:
                 add_cell_rect(f, self.treasure_x, self.treasure_y, 'yellow')
 
+            if solution:
+                if self.solution is None:
+                    print('Error:  There is no solution stored.')
+                else:
+                    for cell in self.solution:
+                        x, y = cell.x, cell.y
+                        add_cell_rect(f, x, y, 'gray')
+
             print('</svg>', file=f)
 
 
@@ -175,6 +190,10 @@ class Maze:
                 if neighbour.has_all_walls():
                     neighbours.append((direction, neighbour))
         return neighbours
+
+
+    def get_solution(self):
+        return self.solution
 
 
     def make_maze(self):
@@ -198,4 +217,10 @@ class Maze:
             current_cell.knock_down_wall(next_cell, direction)
             cell_stack.append(current_cell)
             current_cell = next_cell
+            
+            # Store the solution if we are at the exit cell
+            if (current_cell.x == self.nx - 1) and \
+               (current_cell.y == self.ny - 1):
+                self.solution = cell_stack.copy()
+                self.solution.append(next_cell)
             nv += 1
