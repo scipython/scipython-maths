@@ -16,6 +16,8 @@ class Cell:
 
     # A wall separates a pair of cells in the N-S or W-E directions.
     wall_pairs = {'N': 'S', 'S': 'N', 'E': 'W', 'W': 'E'}
+    # A mapping of cardinal directions to coordinate differences.
+    delta = {'W': (-1, 0), 'E': (1, 0), 'S': (0, 1), 'N': (0, -1)}
 
     def __init__(self, x, y):
         """Initialize the cell at (x,y). At first it is surrounded by walls."""
@@ -121,6 +123,12 @@ class Maze:
             print(f'<rect x="{scx*x+pad}" y="{scy*y+pad}" width="{scx-2*pad}"'
                   f' height="{scy-2*pad}" style="fill:{colour}" />', file=f) 
 
+        def add_path_segment(f, cell, next_cell):
+            sx1, sy1 = scx * (cell.x + 0.5), scy * (cell.y + 0.5)
+            sx2, sy2 = scx * (next_cell.x + 0.5), scy * (next_cell.y + 0.5)
+            print(f'<line x1="{sx1}" y1="{sy1}" x2="{sx2}" y2="{sy2}" style="stroke:rgb(0,0,255)" />',
+                  file=f)
+
         # Write the SVG image file for maze
         with open(filename, 'w') as f:
             # SVG preamble and styles.
@@ -168,9 +176,9 @@ class Maze:
                 if self.solution is None:
                     print('Error:  There is no solution stored.')
                 else:
-                    for cell in self.solution:
-                        x, y = cell.x, cell.y
-                        add_cell_rect(f, x, y, 'gray')
+                    for i, cell in enumerate(self.solution[:-1]):
+                        next_cell = self.solution[i+1]
+                        add_path_segment(f, cell, next_cell)
 
             print('</svg>', file=f)
 
@@ -178,12 +186,8 @@ class Maze:
     def find_valid_neighbours(self, cell):
         """Return a list of unvisited neighbours to cell."""
 
-        delta = [('W', (-1, 0)),
-                 ('E', (1, 0)),
-                 ('S', (0, 1)),
-                 ('N', (0, -1))]
         neighbours = []
-        for direction, (dx, dy) in delta:
+        for direction, (dx, dy) in Cell.delta.items():
             x2, y2 = cell.x + dx, cell.y + dy
             if (0 <= x2 < self.nx) and (0 <= y2 < self.ny):
                 neighbour = self.cell_at(x2, y2)
